@@ -40,3 +40,7 @@ class Channel:
         }
         with open(name, "w", encoding='utf-8') as file:
             json.dump(temp_dict, file, ensure_ascii=False)
+
+    def __str__(self):
+        return f'{self.title} ({self.url})'
+
