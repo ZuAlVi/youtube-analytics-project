@@ -64,3 +64,7 @@ class Channel:
         if isinstance(self, Channel) and isinstance(other, Channel):
             return int(self.subscriber_count) < int(other.subscriber_count)
 
+    def __ge__(self, other):
+        if isinstance(self, Channel) and isinstance(other, Channel):
+            return int(self.subscriber_count) >= int(other.subscriber_count)
+
