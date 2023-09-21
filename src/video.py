@@ -18,3 +18,7 @@ class Video:
 
     def __str__(self):
         return self.video_title
+
+
+class PLVideo(Video):
+    pass
