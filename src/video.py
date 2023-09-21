@@ -15,3 +15,6 @@ class Video:
         self.url = self.video_response['items'][0]['snippet']['thumbnails']['maxres']['url']
         self.view_count = self.video_response['items'][0]['statistics']['viewCount']
         self.like_count = self.video_response['items'][0]['statistics']['likeCount']
+
+    def __str__(self):
+        return self.video_title
