@@ -8,6 +8,7 @@ class Video:
     youtube = build('youtube', 'v3', developerKey=__api_key)
 
     def __init__(self, video_id):
+        """Экземпляр инициализируется id видео. Дальше все данные будут подтягиваться по API."""
         self.video_id = video_id
         self.video_response = Video.youtube.videos().list(
             part='snippet,statistics,contentDetails,topicDetails', id=video_id).execute()
@@ -17,10 +18,14 @@ class Video:
         self.like_count = self.video_response['items'][0]['statistics']['likeCount']
 
     def __str__(self):
+        """Метод возвращает информацию об объекте для пользователя
+        return: '<название канала>'"""
         return self.video_title
 
 
 class PLVideo(Video):
     def __init__(self, video_id, playlist_id):
+        """Экземпляр инициализируется id видео и id плейлиста.
+        Данные будут подтягиваться из родительского класса Video."""
         super().__init__(video_id)
         self.playlist_id = playlist_id
