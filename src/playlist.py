@@ -4,6 +4,8 @@ import os
 import isodate
 from googleapiclient.discovery import build
 
+from src.video import Video
+
 
 class PlayList:
     __api_key: str = os.getenv('YT_API_KEY')
@@ -39,3 +41,17 @@ class PlayList:
             total_time += duration
 
         return total_time
+
+    def show_best_video(self):
+        """Метод возвращает ссылку на самое популярное видео
+         из плейлиста (по количеству лайков)"""
+        video_ids: list[str] = [video['contentDetails']['videoId'] for video in self.playlist_videos['items']]
+        temp_like = 0
+        temp_url = ''
+        for item in video_ids:
+            video = Video(item)
+            like_count = video.like_count
+            if int(like_count) > temp_like:
+                temp_like = int(like_count)
+                temp_url = video.url
+        return temp_url
